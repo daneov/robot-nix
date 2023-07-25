@@ -3,9 +3,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
     robotframework.url = "path:./robotframework";
+    robotframework-browser.url = "path:./robotframework-browser";
     flake-utils.url = "github:numtide/flake-utils";
   };
-  outputs = { self, nixpkgs, flake-utils, robotframework}:
+  outputs = { self, nixpkgs, flake-utils, robotframework, robotframework-browser}:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -13,6 +14,7 @@
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = [
           robotframework.packages.${system}.robotframework
+          robotframework-browser.packages.${system}.robotframework-browser
         ]; 
       };
     };
